@@ -1,9 +1,5 @@
 # TE-Speed-MiniMaxH3-OSS
 
-纯 Python 开源版 MiniMax H3 加速插件。原版 TE-Speed-MiniMaxH3 把核心逻辑编译成了
-`nodes.pyd`（Cython），本包用等价的 Python 代码重新实现了同样的加速算法，
-不依赖任何二进制文件，参数行为与原版一致，并额外提供 `cache_depth` 调优项。
-
 ## 安装
 
 1. 把 `TE-Speed-MiniMaxH3-OSS` 文件夹放入 `ComfyUI\custom_nodes`。
@@ -58,11 +54,4 @@ model -> TESpeedMiniMaxH3(OSS) -> BasicScheduler
 mcs。每轮采样的第一步强制完整步；CFG（正负条件）同一步的两次调用共享同一决策。
 运行结束后控制台打印 `TE-Speed-MiniMaxH3(OSS): acceleration xx.x%` 统计。
 
-默认参数下在参考工作流（30 步、8s 视频）中约提速 45%，与官方 pyd 版本一致。
-
-## 与原版的差异
-
-- 全部逻辑为 Python 源码，可审计、可修改；
-- 新增 `cache_depth` 参数（原版为内部常量，行为按 0.75 还原）；
-- 报错信息更明确：未打钩子补丁时会警告并以原速运行，不会静默失效；
-- 采样中途无法注入统计回调，加速百分比在最后一步/下一轮开始时打印。
+默认参数下在参考工作流（30 步、8s 视频）中约提速 45%。
